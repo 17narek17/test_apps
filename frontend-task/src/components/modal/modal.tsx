@@ -22,7 +22,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
   const handleSubmit = () => {
     if (userAnswer === 5) {
-      onClose(true);
+      onClose();
       return;
     }
 

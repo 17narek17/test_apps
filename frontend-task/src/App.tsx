@@ -20,8 +20,8 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const onClose = (isPlaying: boolean) => {
-    setIsPlaying(isPlaying);
+  const onClose = () => {
+    setIsPlaying(true);
     clearInterval(intervalCheck);
   };
 
