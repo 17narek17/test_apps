@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { QuestionModalProps } from "../types/question-modal.type";
+import React, { useState } from "react";
 import {
   Button,
   FormControlLabel,
@@ -8,17 +7,16 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+import { QuestionModalProps } from "../types/question-modal.type";
 
 export const QuestionModal: React.FC<QuestionModalProps> = ({
   isOpen,
-  setIsOpen,
-  player
+  onClose,
+  setIntervalCheck,
+  intervalCheck,
 }) => {
   const [userAnswer, setUserAnswer] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [intervalCheck, setIntervalCheck] = useState<
-    number | ReturnType<typeof setInterval>
-  >(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserAnswer(+(event.target as HTMLInputElement).value);
@@ -26,7 +24,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
   const handleSubmit = () => {
     if (userAnswer === 5) {
-      setIsOpen(true);
+      onClose(true);
       clearInterval(intervalCheck);
       setIntervalCheck(0);
       return;
@@ -34,17 +32,6 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
     setErrorMessage("Answer is not correct");
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (player?.current && player.current?.getCurrentTime() > 64)
-        setIsOpen(false);
-    }, 1000);
-
-    setIntervalCheck(interval);
-
-    return () => clearInterval(interval);
-  }, [])
 
   return (
     <Modal

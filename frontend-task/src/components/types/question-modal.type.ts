@@ -1,7 +1,8 @@
-import { MutableRefObject } from 'react';
-import ReactPlayer from 'react-player';
+import React from 'react';
+
 export type QuestionModalProps = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  player: MutableRefObject<ReactPlayer | null>
+  onClose: (isOpen: boolean) => void;
+  setIntervalCheck: React.Dispatch<React.SetStateAction<number | ReturnType<typeof setInterval>>>
+  intervalCheck: number | ReturnType<typeof setInterval>
 };
