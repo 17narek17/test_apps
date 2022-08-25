@@ -3,10 +3,8 @@ import ReactPlayer from "react-player";
 import { QuestionModal } from "./components/modal/modal";
 
 function App() {
-  const [isPlaying, setIsPLaying] = useState<boolean>(true);
-  const [userAnswer, setUserAnswer] = useState<string>("0");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [perSecondCheck, setPerSecondCheck] = useState<
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [intervalCheck, setIntervalCheck] = useState<
     number | ReturnType<typeof setInterval>
   >(0);
   const player = useRef<ReactPlayer | null>(null);
@@ -14,28 +12,13 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (player?.current && player.current?.getCurrentTime() > 64)
-        setIsPLaying(false);
+        setIsPlaying(false);
     }, 1000);
 
-    setPerSecondCheck(interval);
+    setIntervalCheck(interval);
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserAnswer((event.target as HTMLInputElement).value);
-  };
-
-  const handleSubmit = () => {
-    if (userAnswer === "5") {
-      setIsPLaying(true);
-      clearInterval(perSecondCheck);
-      setPerSecondCheck(0);
-      return;
-    }
-
-    setErrorMessage("Answer is not correct");
-  };
 
   return (
     <div className="App">
@@ -45,9 +28,9 @@ function App() {
         playing={isPlaying}
       />
       <QuestionModal
-        errorMessage={errorMessage}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
+        setIsOpen={(isPlaying: boolean) => setIsPlaying(isPlaying)}
+        setIntervalCheck={setIntervalCheck}
+        intervalCheck={intervalCheck}
         isOpen={isPlaying}
       />
     </div>
