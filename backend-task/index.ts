@@ -38,7 +38,7 @@ app.get("/sendUserToDrip", async (req, res) => {
 
     res.send(users);
   } catch (err) {
-      console.error(err.message);
+    res.status(500).send({ Error: "Something went wrong" });
   }
 });
 
