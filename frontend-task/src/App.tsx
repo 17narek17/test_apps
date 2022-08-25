@@ -20,6 +20,11 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const onClose = (isPlaying: boolean) => {
+    setIsPlaying(isPlaying)
+    clearInterval(intervalCheck);
+  }
+
   return (
     <div className="App">
       <ReactPlayer
@@ -28,9 +33,8 @@ function App() {
         playing={isPlaying}
       />
       <QuestionModal
-        onClose={(isPlaying: boolean) => setIsPlaying(isPlaying)}
+        onClose={onClose}
         isOpen={isPlaying}
-        intervalCheck={intervalCheck}
       />
     </div>
   );
