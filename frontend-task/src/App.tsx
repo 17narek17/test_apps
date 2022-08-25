@@ -21,9 +21,9 @@ function App() {
   }, []);
 
   const onClose = (isPlaying: boolean) => {
-    setIsPlaying(isPlaying)
+    setIsPlaying(isPlaying);
     clearInterval(intervalCheck);
-  }
+  };
 
   return (
     <div className="App">
@@ -32,10 +32,7 @@ function App() {
         ref={player}
         playing={isPlaying}
       />
-      <QuestionModal
-        onClose={onClose}
-        isOpen={isPlaying}
-      />
+      <QuestionModal onClose={onClose} isOpen={isPlaying} />
     </div>
   );
 }
