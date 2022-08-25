@@ -30,7 +30,6 @@ function App() {
       <QuestionModal
         onClose={(isPlaying: boolean) => setIsPlaying(isPlaying)}
         isOpen={isPlaying}
-        setIntervalCheck={setIntervalCheck}
         intervalCheck={intervalCheck}
       />
     </div>

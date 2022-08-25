@@ -12,7 +12,6 @@ import { QuestionModalProps } from "../types/question-modal.type";
 export const QuestionModal: React.FC<QuestionModalProps> = ({
   isOpen,
   onClose,
-  setIntervalCheck,
   intervalCheck,
 }) => {
   const [userAnswer, setUserAnswer] = useState<number>(0);
@@ -26,7 +25,6 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
     if (userAnswer === 5) {
       onClose(true);
       clearInterval(intervalCheck);
-      setIntervalCheck(0);
       return;
     }
 
